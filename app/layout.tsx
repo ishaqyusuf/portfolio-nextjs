@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import SideMenu from "@/components/side-menu";
 
-const inter = Inter({ subsets: ["latin"] });
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+  weight: "variable",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +21,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html
+      lang="en"
+      className={`${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body suppressHydrationWarning>
+        <main className="min-h-screen bg-white">
+          <div className="lg:flex">
+            <SideMenu />
+            <div className="flex flex-1">{children}</div>
+          </div>
+        </main>
+      </body>
     </html>
   );
 }
